@@ -44,7 +44,8 @@ function DanhSachHoaDon(props) {
     }
 
     const loadHoaDon = () => {
-        let url = baseUrl + "/hoadon?_sort=thang&_order=desc";
+        // let url = baseUrl + "/hoadon?_sort=thang&_order=desc";
+        let url = baseUrl + "/hoadon?sortBy=thang&order=desc";
         axios.get(url)
             .then((res) => setData(res.data));
     }
