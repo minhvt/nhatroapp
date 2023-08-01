@@ -64,14 +64,18 @@ function InsertHoaDon(props) {
             console.log(url);
             axios.get(url)
                 .then(res => {
-                    if (res.data.length > 0) {
-                        console.log(res.data);
-                        alert("Đã có hóa đơn tháng này");
-                    } else {
-                        // Thêm mới
-                        themMoi();
-                        console.log("THÊM MỚI");
-                    }
+                    // MockAPI ngu vãi nồi
+                    // if (res.data.length > 0) {
+                    //     console.log(res.data);
+                    //     alert("Đã có hóa đơn tháng này");
+                    // } else {
+                    //     // Thêm mới
+                    //     themMoi();
+                    //     console.log("THÊM MỚI");
+                    // }
+                    // Thêm mới
+                    themMoi();
+                    console.log("THÊM MỚI");
                 });
         }
     }
