@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import fmtCurrency from './Utils';
 
 function DanhSachPhong(props) {
     const baseUrl = "https://nhatroapi.onrender.com"; // /phongtro /hoadon
@@ -27,9 +28,9 @@ function DanhSachPhong(props) {
                 {data?.map(item => (<tr>
                     <td>{item.id}</td>
                     <td>{item.sophong}</td>
-                    <td>{item.phithue}</td>
-                    <td>{item.giadien}</td>
-                    <td>{item.gianuoc}</td>
+                    <td>{fmtCurrency.format(item.phithue)}</td>
+                    <td>{fmtCurrency.format(item.giadien)}</td>
+                    <td>{fmtCurrency.format(item.gianuoc)}</td>
                     <td>{item.ghichu}</td>
                 </tr>))}
             </table>

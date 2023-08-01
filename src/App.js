@@ -5,6 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import DanhSachPhong from './components/DanhSachPhong';
 import DanhSachHoaDon from './components/DanhSachHoaDon';
+import InsertHoaDon from './components/InsertHoaDon';
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
       <header className="App-header">
         Ứng dụng quản lý nhà trọ - &copy; Trandu 2023
       </header>
-      <div className="box-container">        
+      <div className="box-container">
         <Link to="/">Trang Chủ</Link>
         <Link to="/phong-ds">Phòng</Link>
         <Link to="/hoadon-ds">Hóa Đơn</Link>
@@ -23,7 +24,11 @@ function App() {
         <Routes>
           <Route path='/' Component={Login}></Route>
           <Route path='/phong-ds' Component={DanhSachPhong}></Route>
-          <Route path='/hoadon-ds' Component={DanhSachHoaDon}></Route>
+          <Route path='/hoadon-ds' Component={DanhSachHoaDon}>
+            <Route path='/hoadon-ds/insert' Component={InsertHoaDon}>
+              <Route path=':idhd' Component={InsertHoaDon}></Route>
+            </Route>
+          </Route>
         </Routes>
       </div>
     </div>
