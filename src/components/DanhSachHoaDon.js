@@ -7,9 +7,41 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import fmtCurrency from './Utils';
 
 function DanhSachHoaDon(props) {
-    const baseUrl = "https://nhatroapi.onrender.com"; // /phongtro /hoadon
+    // https://nhatroapi.onrender.com
+    // https://64a6783d096b3f0fcc7fd63a.mockapi.io
+    const baseUrl = "https://64a6783d096b3f0fcc7fd63a.mockapi.io"; // /phongtro /hoadon
+    const [totalBill, setTotalBill] = useState({
+        soDien: 0,
+        soNuoc: 0,
+        tienDien: 0,
+        tienNuoc: 0
+    });
     const [data, setData] = useState();
     const navigate = useNavigate();
+
+    const sumBill = (e, objHD) => {
+        let isChecked = e.target.checked;
+        let sum = totalBill;
+        console.log("isChecked: " + isChecked);
+        if (isChecked == true) {
+            sum.soDien += objHD.sodien;
+            sum.soNuoc += objHD.sonuoc;
+            sum.tienDien += objHD.tiendien;
+            sum.tienNuoc += objHD.tiennuoc;
+        } else {
+            sum.soDien -= objHD.sodien;
+            sum.soNuoc -= objHD.sonuoc;
+            sum.tienDien -= objHD.tiendien;
+            sum.tienNuoc -= objHD.tiennuoc;
+        }
+        console.log(sum);
+        setTotalBill({
+            soDien: sum.soDien,
+            soNuoc: sum.soNuoc,
+            tienDien: sum.tienDien,
+            tienNuoc: sum.tienNuoc
+        });
+    }
 
     const loadHoaDon = () => {
         let url = baseUrl + "/hoadon?_sort=thang&_order=desc";
@@ -111,13 +143,14 @@ function DanhSachHoaDon(props) {
                 });
         }
     }
-
     let location = useLocation();
-    useEffect(loadHoaDon, [location]);
+    useEffect(loadHoaDon, [location, totalBill]);
 
     return (
         <div>
-            <h2>Danh sách hóa đơn</h2>
+            <b>Danh sách hóa đơn</b> <br />
+            {totalBill.soDien > 0 ? (<span>{"Điện: " + totalBill.soDien + "; Nước: " + totalBill.soNuoc} <br /></span>) : ("")}
+            {totalBill.tienDien > 0 ? (<span>{"Tiền điện: " + fmtCurrency.format(totalBill.tienDien) + "; Tiền nước: " + fmtCurrency.format(totalBill.tienNuoc)} <br /></span>) : ("")}
             <Link to="/hoadon-ds/insert">Thêm mới</Link>
             <hr />
             <Outlet />
@@ -126,6 +159,7 @@ function DanhSachHoaDon(props) {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Tổng</th>
                         <th>Phòng</th>
                         <th>Tháng</th>
                         <th>Số điện</th>
@@ -141,7 +175,10 @@ function DanhSachHoaDon(props) {
                 <tbody>
                     {data?.map((item, key) => (<tr key={key}>
                         <td>{item.id}</td>
-                        <td>{item.idphong}</td>
+                        <td align='center' >
+                            <input type="checkbox" onChange={(e) => sumBill(e, item)} />
+                        </td>
+                        <td align='center' style={{ color: "blue" }}><b>{item.idphong}</b></td>
                         <td>{item.thang}</td>
                         <td>{item.sodien}</td>
                         <td>{item.sonuoc}</td>

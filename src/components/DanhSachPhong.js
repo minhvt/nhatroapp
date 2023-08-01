@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import fmtCurrency from './Utils';
 
 function DanhSachPhong(props) {
-    const baseUrl = "https://nhatroapi.onrender.com"; // /phongtro /hoadon
+    const baseUrl = "https://64a6783d096b3f0fcc7fd63a.mockapi.io"; // /phongtro /hoadon
     const [data, setData] = useState();
     const loadPhongTro = () => {
         let url = baseUrl + "/phongtro";

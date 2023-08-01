@@ -14,7 +14,7 @@ function InsertHoaDon(props) {
     const [mess, setMess] = useState("");
     const navigate = useNavigate();
 
-    const baseUrl = "https://nhatroapi.onrender.com"; // /phongtro /hoadon
+    const baseUrl = "https://64a6783d096b3f0fcc7fd63a.mockapi.io"; // /phongtro /hoadon
     const [data, setData] = useState();
 
     const onload = () => {
