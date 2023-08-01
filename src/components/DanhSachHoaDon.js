@@ -79,12 +79,18 @@ function DanhSachHoaDon(props) {
         console.log("monthPre: " + monthPre.toISOString().split('T')[0]);
 
         let strThang = monthPre.toISOString().split('T')[0];
-        let url = baseUrl + "/hoadon?idphong=" + idphong + "&thang=" + strThang;
+        let url = baseUrl + "/hoadon?thang=" + strThang; // Mock API ngu: idphong=" + idphong + "&    
         console.log(url);
 
         axios.get(url)
             .then(res => {
                 let objPre = res.data[0];
+                // Tìm idphong đúng
+                res.data.forEach(element => {
+                    if (element.idphong == idphong) {
+                        objPre = element;
+                    }
+                });
                 if (objPre != null) {
                     let chiSoDien = obj.sodien - objPre.sodien;
                     let chiSoNuoc = obj.sonuoc - objPre.sonuoc;
@@ -152,6 +158,7 @@ function DanhSachHoaDon(props) {
             <b>Danh sách hóa đơn</b> <br />
             {totalBill.soDien > 0 ? (<span>{"Điện: " + totalBill.soDien + "; Nước: " + totalBill.soNuoc} <br /></span>) : ("")}
             {totalBill.tienDien > 0 ? (<span>{"Tiền điện: " + fmtCurrency.format(totalBill.tienDien) + "; Tiền nước: " + fmtCurrency.format(totalBill.tienNuoc)} <br /></span>) : ("")}
+            {totalBill.tienDien > 0 ? <span style={{ color: "red" }}>Tổng tiền: {fmtCurrency.format(totalBill.tienDien + totalBill.tienNuoc)} <br /></span> : ""}
             <Link to="/hoadon-ds/insert">Thêm mới</Link>
             <hr />
             <Outlet />
