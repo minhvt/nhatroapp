@@ -136,13 +136,13 @@ function InsertHoaDon(props) {
                             <tr>
                                 <th>Số điện</th>
                                 <td>
-                                    <input type="number" step="1" id="sodien" min="1" value={inputs.sodien} onChange={handleChange} />
+                                    <input type="number" step="1" id="sodien" min="0" value={inputs.sodien} onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>
                                 <th>Số nước</th>
                                 <td>
-                                    <input type="number" step="1" id="sonuoc" min="1" value={inputs.sonuoc} onChange={handleChange} />
+                                    <input type="number" step="1" id="sonuoc" min="0" value={inputs.sonuoc} onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>

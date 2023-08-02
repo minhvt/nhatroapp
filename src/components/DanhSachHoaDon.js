@@ -24,13 +24,13 @@ function DanhSachHoaDon(props) {
         let sum = totalBill;
         console.log("isChecked: " + isChecked);
         if (isChecked == true) {
-            sum.soDien += objHD.sodien;
-            sum.soNuoc += objHD.sonuoc;
+            sum.soDien += objHD.tongdien;
+            sum.soNuoc += objHD.tongnuoc;
             sum.tienDien += objHD.tiendien;
             sum.tienNuoc += objHD.tiennuoc;
         } else {
-            sum.soDien -= objHD.sodien;
-            sum.soNuoc -= objHD.sonuoc;
+            sum.soDien -= objHD.tongdien;
+            sum.soNuoc -= objHD.tongnuoc;
             sum.tienDien -= objHD.tiendien;
             sum.tienNuoc -= objHD.tiennuoc;
         }
@@ -117,8 +117,11 @@ function DanhSachHoaDon(props) {
                 // console.log("Giá nước: " + phong.gianuoc);
                 // console.log("Điện tháng này: " + (phong.giadien * chiSoDien));
                 // console.log("Nước tháng này: " + (phong.gianuoc * chiSoNuoc));
+                objHD.tongdien = chiSoDien;
+                objHD.tongnuoc = chiSoNuoc;
                 objHD.tiendien = tienDien;
                 objHD.tiennuoc = tienNuoc;
+                objHD.ghichu = "Đã tính hóa đơn";
                 updateHoaDon(objHD);
             });
     }
@@ -166,14 +169,14 @@ function DanhSachHoaDon(props) {
             <table border="1" style={{ width: "100%" }}>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Tổng</th>
                         <th>Phòng</th>
-                        <th>Tháng</th>
                         <th>Số điện</th>
                         <th>Số nước</th>
                         <th>Tiền điện</th>
                         <th>Tiền nước</th>
+                        <th>Tháng</th>
                         <th>Ghi chú</th>
                         <th>Tính tiền</th>
                         <th>Cập nhật</th>
@@ -182,16 +185,16 @@ function DanhSachHoaDon(props) {
                 </thead>
                 <tbody>
                     {data?.map((item, key) => (<tr key={key}>
-                        <td>{item.id}</td>
-                        <td align='center' >
+                        {/* <td>{item.id}</td> */}
+                        <td align='center'>
                             <input type="checkbox" onChange={(e) => sumBill(e, item)} />
                         </td>
                         <td align='center' style={{ color: "blue" }}><b>{item.idphong}</b></td>
-                        <td>{item.thang}</td>
-                        <td>{item.sodien}</td>
-                        <td>{item.sonuoc}</td>
-                        <td>{fmtCurrency.format(item.tiendien)}</td>
-                        <td>{fmtCurrency.format(item.tiennuoc)}</td>
+                        <td align='center'>{item.sodien}</td>
+                        <td align='center'>{item.sonuoc}</td>
+                        <td align='right'>{fmtCurrency.format(item.tiendien)}</td>
+                        <td align='right'>{fmtCurrency.format(item.tiennuoc)}</td>
+                        <td align='center'>{item.thang}</td>
                         <td>{item.ghichu}</td>
                         <td align='center'>
                             <img onClick={() => thanhToan(item, item.idphong, new Date(item.thang))} src={cash} alt='Thanh toán' />
