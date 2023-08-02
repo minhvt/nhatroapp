@@ -153,12 +153,28 @@ function DanhSachHoaDon(props) {
                 });
         }
     }
+
+    const loadHoaDonByMonth = (e) => {
+        let value = e.target.value;
+        let month = new Date(value);
+        month.setDate(1);
+        let url = baseUrl + "/hoadon?thang=" + month.toISOString().substring(0,10) + "&sortBy=idphong&order=asc";
+        console.log("URL: " + url);
+        axios.get(url)
+            .then((res) => {
+                let db = res.data;
+                // Sắp xếp
+                //db.sort((a, b) => a.idphong - b.idphong);
+                setData(db);
+            });
+    }
+
     let location = useLocation();
-    useEffect(loadHoaDon, [location, totalBill]);
+    useEffect(loadHoaDon, [location]);
 
     return (
-        <div>
-            <b>Danh sách hóa đơn</b> <br />
+        <div>            
+            <b>Danh sách hóa đơn</b> <input type="date" onChange={loadHoaDonByMonth} /><br />
             {totalBill.soDien > 0 ? (<span>{"Điện: " + totalBill.soDien + "; Nước: " + totalBill.soNuoc} <br /></span>) : ("")}
             {totalBill.tienDien > 0 ? (<span>{"Tiền điện: " + fmtCurrency.format(totalBill.tienDien) + "; Tiền nước: " + fmtCurrency.format(totalBill.tienNuoc)} <br /></span>) : ("")}
             {totalBill.tienDien > 0 ? <span style={{ color: "red" }}>Tổng tiền: {fmtCurrency.format(totalBill.tienDien + totalBill.tienNuoc)} <br /></span> : ""}
