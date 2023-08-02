@@ -192,11 +192,11 @@ function DanhSachHoaDon(props) {
                         <th>Số nước</th>
                         <th>Tiền điện</th>
                         <th>Tiền nước</th>
-                        <th>Tháng</th>
-                        <th>Ghi chú</th>
-                        <th>Tính tiền</th>
-                        <th>Cập nhật</th>
-                        <th>Xóa</th>
+                        <th className='box-hidden'>Tháng</th>
+                        <th className='box-hidden'>Ghi chú</th>
+                        <th className='box-hidden'>Tính tiền</th>
+                        <th className='box-hidden'>Cập nhật</th>
+                        <th className='box-hidden'>Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -210,15 +210,15 @@ function DanhSachHoaDon(props) {
                         <td align='center'>{item.sonuoc}</td>
                         <td align='right'>{fmtCurrency.format(item.tiendien)}</td>
                         <td align='right'>{fmtCurrency.format(item.tiennuoc)}</td>
-                        <td align='center'>{item.thang}</td>
-                        <td>{item.ghichu}</td>
-                        <td align='center'>
+                        <td className='box-hidden' align='center'>{item.thang}</td>
+                        <td className='box-hidden'>{item.ghichu}</td>
+                        <td className='box-hidden' align='center'>
                             <img onClick={() => thanhToan(item, item.idphong, new Date(item.thang))} src={cash} alt='Thanh toán' />
                         </td>
-                        <td align='center'>
+                        <td className='box-hidden' align='center'>
                             <img onClick={() => initUpdateHoaDon(item)} src={imgUpdate} alt='Cập nhật' />
                         </td>
-                        <td align='center'>
+                        <td className='box-hidden' align='center'>
                             <img onClick={() => initDeleteHoaDon(item)} src={imgDelete} alt='Xóa' />
                         </td>
                     </tr>))}

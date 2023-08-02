@@ -52,3 +52,9 @@ a {
   margin: 5px;
   text-decoration: none;
 }
+
+@media screen and (max-width: 650px){
+  .box-hidden{
+    display: none;
+  }
+}
