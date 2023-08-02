@@ -43,7 +43,7 @@
   margin: 0 auto;
   border: 1px solid #282c34;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: scroll;
   padding: 10px;
   margin-top: 10px;
   text-align: left;
