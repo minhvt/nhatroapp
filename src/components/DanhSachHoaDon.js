@@ -185,13 +185,13 @@ function DanhSachHoaDon(props) {
             <table border="1" style={{ width: "100%", marginTop: "10px" }}>
                 <thead style={{ textAlign: "center" }}>
                     <tr>
-                        {/* <th>ID</th> */}
-                        <th>Tổng</th>
+                        {/* <th>ID</th> */}                        
                         <th>Phòng</th>
                         <th>Số điện</th>
                         <th>Số nước</th>
                         <th>Tiền điện</th>
                         <th>Tiền nước</th>
+                        <th>Tổng</th>
                         <th className='box-hidden'>Tháng</th>
                         <th className='box-hidden'>Ghi chú</th>
                         <th className='box-hidden'>Tính tiền</th>
@@ -201,15 +201,15 @@ function DanhSachHoaDon(props) {
                 </thead>
                 <tbody>
                     {data?.map((item, key) => (<tr key={key}>
-                        {/* <td>{item.id}</td> */}
-                        <td align='center'>
-                            <input type="checkbox" onChange={(e) => sumBill(e, item)} />
-                        </td>
+                        {/* <td>{item.id}</td> */}                       
                         <td align='center' style={{ color: "blue" }}><b>{item.idphong}</b></td>
                         <td align='center'>{item.sodien}</td>
                         <td align='center'>{item.sonuoc}</td>
                         <td align='right'>{fmtCurrency.format(item.tiendien)}</td>
                         <td align='right'>{fmtCurrency.format(item.tiennuoc)}</td>
+                        <td align='center'>
+                            <input type="checkbox" onChange={(e) => sumBill(e, item)} />
+                        </td>
                         <td className='box-hidden' align='center'>{item.thang}</td>
                         <td className='box-hidden'>{item.ghichu}</td>
                         <td className='box-hidden' align='center'>
