@@ -43,6 +43,7 @@
   margin: 0 auto;
   border: 1px solid #282c34;
   box-sizing: border-box;
+  overflow: hidden;
   padding: 10px;
   margin-top: 10px;
   text-align: left;
@@ -51,6 +52,10 @@
 a {
   margin: 5px;
   text-decoration: none;
+}
+
+table {
+  width: 100%;
 }
 
 @media screen and (max-width: 650px){
