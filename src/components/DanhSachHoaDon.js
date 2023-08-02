@@ -183,7 +183,7 @@ function DanhSachHoaDon(props) {
             <Outlet />
             <hr />
             <table border="1" style={{ width: "100%" }}>
-                <thead>
+                <thead style={{textAlign: "center"}}>
                     <tr>
                         {/* <th>ID</th> */}
                         <th>Tổng</th>
