@@ -56,10 +56,11 @@ function InsertHoaDon(props) {
                     setMess("Lỗi: " + err);
                     console.log("Thất bại do: " + err);
                 });
-        } else {
+        } else {            
             // Thêm mới
             let thangThue = new Date(inputs.thang);
-            thangThue.setDate(1);
+            thangThue.setDate(1); // Cài đặt lại về ngày mùng 1 đầu tháng
+            inputs.thang = thangThue.toISOString().substring(0, 10);
             url += "?idphong=" + inputs.idphong + "&thang=" + thangThue.toISOString().substring(0, 10);
             console.log(url);
             axios.get(url)
