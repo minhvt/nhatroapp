@@ -56,28 +56,33 @@ function InsertHoaDon(props) {
                     setMess("Lỗi: " + err);
                     console.log("Thất bại do: " + err);
                 });
-        } else {            
+        } else {
             // Thêm mới
             let thangThue = new Date(inputs.thang);
             thangThue.setDate(1); // Cài đặt lại về ngày mùng 1 đầu tháng
             inputs.thang = thangThue.toISOString().substring(0, 10);
             url += "?idphong=" + inputs.idphong + "&thang=" + thangThue.toISOString().substring(0, 10);
             console.log(url);
-            axios.get(url)
-                .then(res => {
-                    // MockAPI ngu vãi nồi
-                    // if (res.data.length > 0) {
-                    //     console.log(res.data);
-                    //     alert("Đã có hóa đơn tháng này");
-                    // } else {
-                    //     // Thêm mới
-                    //     themMoi();
-                    //     console.log("THÊM MỚI");
-                    // }
-                    // Thêm mới
-                    themMoi();
-                    console.log("THÊM MỚI");
-                });
+            // Chạy api kèm bắt lỗi try-catch
+            try {
+                axios.get(url)
+                    .then(res => {
+                        console.log(res);
+                        // MockAPI ngu vãi nồi
+                        if (res.data.length > 0) {
+                            console.log(res.data);                            
+                            setMess("Đã có hóa đơn tháng này");
+                        }                        
+                    })
+                    .catch(err => {
+                        // Thêm mới
+                        themMoi();
+                        console.log("THÊM MỚI");
+                        //console.log("OẠCH! >>> " + err);
+                    });
+            } catch (error) {
+                console.log("LỖI LÒI TÒI PHÒI" + error);
+            }
         }
     }
 
